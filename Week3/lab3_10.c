@@ -1,9 +1,45 @@
-// Week 3 - Structure
-// Lab 3.10
-
 #include <stdio.h>
 
+struct Item {
+    char name[50];
+    float unitPrice;
+    int quantity;
+};
+
 int main() {
-    printf("Week 3 - Lab 3.10\n");
+    int N, i;
+    float subTotal = 0.0;
+    float totalVAT = 0.0;
+    float grandTotal = 0.0;
+
+    if (scanf("%d", &N) != 1) {
+        return 1;
+    }
+
+    struct Item items[N];
+
+    printf("--- RECEIPT ---\n");
+
+    for (i = 0; i < N; i++) {
+        float costItem;
+
+        if (scanf("%s %f %d", items[i].name, &items[i].unitPrice, &items[i].quantity) != 3) {
+            return 1;
+        }
+
+        costItem = items[i].unitPrice * items[i].quantity;
+        printf("%s x %d = %.2f\n", items[i].name, items[i].quantity, costItem);
+
+        subTotal += costItem;
+    }
+
+    totalVAT = subTotal * 0.07;
+    grandTotal = subTotal + totalVAT;
+
+    printf("-------------\n");
+    printf("Subtotal: %.2f\n", subTotal);
+    printf("VAT (7%%): %.2f\n", totalVAT);
+    printf("Grand Total: %.2f\n", grandTotal);
+
     return 0;
 }
