@@ -1,9 +1,21 @@
-// Week 2 - Loop Statement
-// Lab 2.1
-
 #include <stdio.h>
 
 int main() {
-    printf("Week 2 - Lab 2.1\n");
+
+    int loopsWanted;
+
+    if (scanf("%d", &loopsWanted) != 1) {
+        return 1;
+    }
+
+    if (loopsWanted <= 0) {
+        printf("Error\n");
+        return 0;
+    }
+
+    for (int lineCounter = 0; lineCounter < loopsWanted; lineCounter++) {
+        printf("Hello Loop!\n");
+    }
+
     return 0;
 }
