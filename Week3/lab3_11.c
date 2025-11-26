@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 int main() {
+
     int choice;
-    float totalCost = 0.0;
+    float totalCost = 0.0f;
     float paidAmount;
     float change;
 
@@ -13,35 +14,37 @@ int main() {
         printf("3. Snack (25.00)\n");
         printf("4. Exit and Pay\n");
         printf("Current Total: %.2f\n", totalCost);
+
         printf("Select item (1-4): ");
+        if (scanf("%d", &choice) != 1) {
+            return 1;
+        }
 
-        if (scanf("%d", &choice) != 1) return 1;
-
-        switch (choice) {
-            case 1: 
-                totalCost += 15.0;
-                printf("Item added. Current Total: %.2f\n", totalCost);
-                break;
-            case 2: 
-                totalCost += 10.0;
-                printf("Item added. Current Total: %.2f\n", totalCost);
-                break;
-            case 3:
-                totalCost += 25.0;
-                printf("Item added. Current Total: %.2f\n", totalCost);
-                break;
-            case 4:
-                break;
-            default:
-                printf("Invalid choice. Current Total: %.2f\n", totalCost);
+        if (choice == 1) {
+            totalCost += 15.0f;
+            printf("Item added. Current Total: %.2f\n", totalCost);
+        } 
+        else if (choice == 2) {
+            totalCost += 10.0f;
+            printf("Item added. Current Total: %.2f\n", totalCost);
+        } 
+        else if (choice == 3) {
+            totalCost += 25.0f;
+            printf("Item added. Current Total: %.2f\n", totalCost);
+        } 
+        else if (choice != 4) {
+            printf("Invalid choice. Current Total: %.2f\n", totalCost);
         }
 
     } while (choice != 4);
 
-    if (totalCost > 0.0) {
+    if (totalCost > 0.0f) {
         printf("Total due: %.2f\n", totalCost);
         printf("Enter paid amount: ");
-        if (scanf("%f", &paidAmount) != 1) return 1;
+
+        if (scanf("%f", &paidAmount) != 1) {
+            return 1;
+        }
 
         if (paidAmount >= totalCost) {
             change = paidAmount - totalCost;
@@ -49,6 +52,7 @@ int main() {
         } else {
             printf("Insufficient payment. Purchase cancelled.\n");
         }
+
     } else {
         printf("No items purchased. Goodbye!\n");
     }
