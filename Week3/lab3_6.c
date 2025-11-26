@@ -1,46 +1,40 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 struct Transaction {
-    char info[50];
-    float cashFlow;
+    char detail[50];
+    float amount;
 };
 
 int main() {
-    int entries, p;
-    float incomeSum = 0.0;
-    float expenseSum = 0.0;
-    float netFinal = 0.0;
 
-    if (scanf("%d", &entries) != 1) return 1;
-    if (entries < 1) {
-        printf("Total Income: 0.00\n");
-        printf("Total Expense: 0.00\n");
-        printf("Net Balance: 0.00\n");
-        return 0;
+    int n, i;
+    float totalIncome = 0.0f;
+    float totalExpense = 0.0f;
+    float netBalance = 0.0f;
+
+    if (scanf("%d", &n) != 1) {
+        return 1;
     }
 
-    struct Transaction *ledger = malloc(sizeof(struct Transaction) * entries);
-    if (!ledger) return 1;
+    struct Transaction record[n];
 
-    for (p = 0; p < entries; p++) {
-        if (scanf("%f %49s", &ledger[p].cashFlow, ledger[p].info) != 2) {
-            free(ledger);
+    for (i = 0; i < n; i++) {
+        if (scanf("%f %49s", &record[i].amount, record[i].detail) != 2) {
             return 1;
         }
 
-        if (ledger[p].cashFlow >= 0.0)
-            incomeSum += ledger[p].cashFlow;
-        else
-            expenseSum += -ledger[p].cashFlow;
+        if (record[i].amount >= 0.0f) {
+            totalIncome += record[i].amount;
+        } else {
+            totalExpense += -record[i].amount;
+        }
     }
 
-    netFinal = incomeSum - expenseSum;
+    netBalance = totalIncome - totalExpense;
 
-    printf("Total Income: %.2f\n", incomeSum);
-    printf("Total Expense: %.2f\n", expenseSum);
-    printf("Net Balance: %.2f\n", netFinal);
+    printf("Total Income: %.2f\n", totalIncome);
+    printf("Total Expense: %.2f\n", totalExpense);
+    printf("Net Balance: %.2f\n", netBalance);
 
-    free(ledger);
     return 0;
 }
