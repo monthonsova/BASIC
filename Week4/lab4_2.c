@@ -1,20 +1,32 @@
 #include <stdio.h>
 
 int main() {
-    int total, k;
-    int sumPass = 0;
-    int flop = 0;
 
-    scanf("%d", &total);
-    int pile[total];
+    int n;
+    int i;
+    int passTotal = 0;
+    int failTotal = 0;
 
-    for (k = 0; k < total; k++) {
-        scanf("%d", &pile[k]);
-        if (pile[k] >= 50) sumPass += pile[k];
-        else flop++;
+    if (scanf("%d", &n) != 1) {
+        return 1;
     }
 
-    printf("Passing Scores Sum: %d\n", sumPass);
-    printf("Failing Students Count: %d\n", flop);
+    int scoreList[n];
+
+    for (i = 0; i < n; i++) {
+        if (scanf("%d", &scoreList[i]) != 1) {
+            return 1;
+        }
+
+        if (scoreList[i] >= 50) {
+            passTotal += scoreList[i];
+        } else {
+            failTotal++;
+        }
+    }
+
+    printf("Passing Scores Sum: %d\n", passTotal);
+    printf("Failing Students Count: %d\n", failTotal);
+
     return 0;
 }
