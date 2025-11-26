@@ -12,10 +12,10 @@
 #define C_ROWS 2
 #define C_COLS 2
 
-void print_matrix(int rows, int cols, int matrix[rows][cols]) {
+void print_matrix(int rows, int cols, int m[rows][cols]) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            printf("%4d ", matrix[i][j]);
+            printf("%4d ", m[i][j]);
         }
         printf("\n");
     }
@@ -23,10 +23,10 @@ void print_matrix(int rows, int cols, int matrix[rows][cols]) {
 
 int main() {
 
-    int gridA[A_ROWS][A_COLS];
-    int gridB[B_ROWS][B_COLS];
-    int gridBT[BT_ROWS][BT_COLS];
-    int resultBox[C_ROWS][C_COLS];
+    int A[A_ROWS][A_COLS];
+    int B[B_ROWS][B_COLS];
+    int BT[BT_ROWS][BT_COLS];
+    int C[C_ROWS][C_COLS];
 
     int i, j, k;
 
@@ -34,7 +34,7 @@ int main() {
     for (i = 0; i < A_ROWS; i++) {
         for (j = 0; j < A_COLS; j++) {
             printf("A[%d][%d]: ", i, j);
-            scanf("%d", &gridA[i][j]);
+            scanf("%d", &A[i][j]);
         }
     }
 
@@ -42,41 +42,41 @@ int main() {
     for (i = 0; i < B_ROWS; i++) {
         for (j = 0; j < B_COLS; j++) {
             printf("B[%d][%d]: ", i, j);
-            scanf("%d", &gridB[i][j]);
+            scanf("%d", &B[i][j]);
         }
     }
 
-    // Transpose B → gridBT
+    /* Transpose B to BT */
     for (i = 0; i < BT_ROWS; i++) {
         for (j = 0; j < BT_COLS; j++) {
-            gridBT[i][j] = gridB[j][i];
+            BT[i][j] = B[j][i];
         }
     }
 
-    // Multiply A × BT → resultBox
+    /* Multiply A by BT */
     for (i = 0; i < C_ROWS; i++) {
         for (j = 0; j < C_COLS; j++) {
-            int sumCell = 0;
+            int accumulator = 0;
             for (k = 0; k < A_COLS; k++) {
-                sumCell += gridA[i][k] * gridBT[k][j];
+                accumulator += A[i][k] * BT[k][j];
             }
-            resultBox[i][j] = sumCell;
+            C[i][j] = accumulator;
         }
     }
 
     printf("\n--- MATRIX MULTIPLICATION REPORT ---\n");
 
     printf("\nMatrix A (2x3):\n");
-    print_matrix(A_ROWS, A_COLS, gridA);
+    print_matrix(A_ROWS, A_COLS, A);
 
     printf("\nMatrix B (2x3):\n");
-    print_matrix(B_ROWS, B_COLS, gridB);
+    print_matrix(B_ROWS, B_COLS, B);
 
     printf("\nMatrix B Transposed (BT, 3x2):\n");
-    print_matrix(BT_ROWS, BT_COLS, gridBT);
+    print_matrix(BT_ROWS, BT_COLS, BT);
 
     printf("\nResult Matrix C (A x BT, 2x2):\n");
-    print_matrix(C_ROWS, C_COLS, resultBox);
+    print_matrix(C_ROWS, C_COLS, C);
 
     return 0;
 }
