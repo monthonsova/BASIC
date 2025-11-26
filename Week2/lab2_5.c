@@ -2,22 +2,28 @@
 
 int main() {
 
-    int score;
+    int scoreBox;
     int gradeA = 0, gradeB = 0, gradeC = 0, gradeD = 0, gradeF = 0;
 
-    if (scanf("%d", &score) != 1) {
+    if (scanf("%d", &scoreBox) != 1) {
         return 1;
     }
 
-    while (score != -1) {
+    while (scoreBox != -1) {
 
-        if (score >= 80) gradeA++;
-        else if (score >= 70) gradeB++;
-        else if (score >= 60) gradeC++;
-        else if (score >= 50) gradeD++;
-        else gradeF++;
+        if (scoreBox >= 80) {
+            gradeA++;
+        } else if (scoreBox >= 70) {
+            gradeB++;
+        } else if (scoreBox >= 60) {
+            gradeC++;
+        } else if (scoreBox >= 50) {
+            gradeD++;
+        } else {
+            gradeF++;
+        }
 
-        if (scanf("%d", &score) != 1) {
+        if (scanf("%d", &scoreBox) != 1) {
             break;
         }
     }
