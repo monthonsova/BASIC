@@ -1,17 +1,24 @@
 #include <stdio.h>
 
 int main() {
-    int amount, idx;
-    if (scanf("%d", &amount) != 1) return 1;
 
-    int vault[amount];
+    int N;
+    int i;
 
-    for (idx = 0; idx < amount; idx++) {
-        scanf("%d", &vault[idx]);
+    if (scanf("%d", &N) != 1) {
+        return 1;
     }
 
-    for (idx = amount - 1; idx >= 0; idx--) {
-        printf("%d\n", vault[idx]);
+    int values[N];
+
+    for (i = 0; i < N; i++) {
+        if (scanf("%d", &values[i]) != 1) {
+            return 1;
+        }
+    }
+
+    for (i = N - 1; i >= 0; i--) {
+        printf("%d\n", values[i]);
     }
 
     return 0;
