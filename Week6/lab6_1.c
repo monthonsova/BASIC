@@ -1,9 +1,21 @@
-// Week 6 - Basic Pointer
-// Lab 6.1
-
 #include <stdio.h>
 
+void increase_value(int *number_ptr) {
+    *number_ptr = *number_ptr + 10;
+}
+
 int main() {
-    printf("Week 6 - Lab 6.1\n");
+    int coreData;
+
+    printf("Enter initial integer value: ");
+    scanf("%d", &coreData);
+
+    printf("\n--- POINTER MODIFICATION REPORT ---\n");
+    printf("1. Value BEFORE function call: %d\n", coreData);
+
+    increase_value(&coreData);
+
+    printf("2. Value AFTER function call: %d\n", coreData);
+
     return 0;
 }
