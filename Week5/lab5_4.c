@@ -1,9 +1,51 @@
-// Week 5 - Function
-// Lab 5.4
-
 #include <stdio.h>
 
+#define NUM_STUDENTS 3
+
+struct Student {
+    int id;
+    int score;
+};
+
+int find_max_score_id(struct Student students[], int size);
+
 int main() {
-    printf("Week 5 - Lab 5.4\n");
+    struct Student class_data[NUM_STUDENTS];
+    int top_id;
+    int i;
+
+    printf("Enter data for %d students:\n", NUM_STUDENTS);
+    for (i = 0; i < NUM_STUDENTS; i++) {
+        printf("--- Student %d ---\n", i + 1);
+        printf("Enter ID: ");
+        scanf("%d", &class_data[i].id);
+        printf("Enter Score: ");
+        scanf("%d", &class_data[i].score);
+    }
+
+    top_id = find_max_score_id(class_data, NUM_STUDENTS);
+
+    printf("\n--- STUDENT SCORE REPORT ---\n");
+    printf("ID     | Score\n");
+    printf("-------|-------\n");
+    for (i = 0; i < NUM_STUDENTS; i++) {
+        printf("%-6d | %d\n", class_data[i].id, class_data[i].score);
+    }
+    printf("\nTOP PERFORMER ID: %d\n", top_id);
+
     return 0;
+}
+
+int find_max_score_id(struct Student students[], int size) {
+    int max_score = students[0].score;
+    int max_id = students[0].id;
+    int k;
+
+    for (k = 1; k < size; k++) {
+        if (students[k].score > max_score) {
+            max_score = students[k].score;
+            max_id = students[k].id;
+        }
+    }
+    return max_id;
 }
