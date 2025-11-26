@@ -1,35 +1,60 @@
 #include <stdio.h>
 
+#define MAX_SIZE 10
+#define UNVISITED 0
+#define COUNTED -1
+
 int main() {
-    int arr[10], tag[10];
-    int n, i, j, freq;
 
-    for (i = 0; i < 10; i++) tag[i] = 0;
+    int data[MAX_SIZE];
+    int status[MAX_SIZE];
+    int N;
+    int i, j;
 
-    scanf("%d", &n);
-    if (n < 1 || n > 10) n = 10;
+    for (i = 0; i < MAX_SIZE; i++) {
+        status[i] = UNVISITED;
+    }
 
-    for (i = 0; i < n; i++) scanf("%d", &arr[i]);
+    scanf("%d", &N);
+    if (N > MAX_SIZE || N < 1) {
+        N = MAX_SIZE;
+    }
 
-    printf("--- FREQUENCY ANALYSIS REPORT ---\n");
-    printf("Total elements recorded (N): %d\n", n);
+    for (i = 0; i < N; i++) {
+        scanf("%d", &data[i]);
+    }
+
+    printf("\n--- FREQUENCY ANALYSIS REPORT ---\n");
+    printf("Total elements recorded (N): %d\n", N);
+
     printf("Recorded Numbers: ");
-    for (i = 0; i < n; i++) printf("%d ", arr[i]);
-    printf("\n--- FREQUENCY TABLE ---\n");
+    for (i = 0; i < N; i++) {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+
+    printf("--- FREQUENCY TABLE ---\n");
     printf("Number | Frequency\n");
     printf("-------|----------\n");
 
-    for (i = 0; i < n; i++) {
-        if (!tag[i]) {
-            freq = 1;
-            for (j = i + 1; j < n; j++) {
-                if (arr[j] == arr[i]) {
-                    freq++;
-                    tag[j] = 1;
-                }
-            }
-            printf("%d      | %d\n", arr[i], freq);
+    for (i = 0; i < N; i++) {
+
+        if (status[i] == COUNTED) {
+            continue;
         }
+
+        int freqCount = 1;
+
+        for (j = i + 1; j < N; j++) {
+            if (data[j] == data[i] && status[j] != COUNTED) {
+                freqCount++;
+                status[j] = COUNTED;
+            }
+        }
+
+        status[i] = COUNTED;
+
+        printf("%-6d | %d\n", data[i], freqCount);
     }
 
     return 0;
