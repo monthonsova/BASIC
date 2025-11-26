@@ -9,19 +9,27 @@ int main() {
     }
 
     switch (dayCode) {
-        case 1: case 2: case 3: case 4: case 5:
-            if (hour >= 8 && hour <= 17)
-                printf("System Running (Workday)\n");
-            else
-                printf("System Idle (Off-hours)\n");
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5: {
+            if (hour >= 8 && hour <= 17) {
+                printf("System Running (Workday)");
+            } else {
+                printf("System Idle (Off-hours)");
+            }
             break;
+        }
 
-        case 6: case 7:
-            printf("Weekend Relax Mode\n");
+        case 6:
+        case 7:
+            printf("Weekend Relax Mode");
             break;
 
         default:
-            printf("Invalid Day Code\n");
+            printf("Invalid Day Code");
+            break;
     }
 
     return 0;
